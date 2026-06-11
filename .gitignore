@@ -1,0 +1,6 @@
+# LibreOffice / Office Sperr- & Temp-Dateien
+.~lock.*#
+*.tmp
+
+# macOS
+.DS_Store
