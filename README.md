@@ -18,7 +18,9 @@ meine-website-ai-studio/
     ├── feinplanung.md  ← schriftliche Vorbereitung (Abgabe via myLWO)
     ├── feinplanung.pdf
     ├── handout.md      ← einseitiges Handout für Teilnehmende
-    └── handout.pdf
+    ├── handout.pdf
+    ├── slides.pptx     ← Präsentationsfolien (10 Folien, ARIVA)
+    └── slides.pdf
 ```
 
 > `index.html` muss im Hauptordner bleiben – GitHub Pages nutzt sie als Startseite.
