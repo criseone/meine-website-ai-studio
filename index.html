@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Website-Prompt-Baukasten · für Google AI Studio</title>
+<title>Prompt-Baukasten · für Google AI Studio</title>
 <style>
   :root{
     --paper:#ffffff; --ink:#121316; --muted:#71717a; --line:#e4e4e7;
@@ -92,8 +92,8 @@
 
   <header>
     <p class="eyebrow">Minilektion</p>
-    <h1>Website-Prompt-Baukasten</h1>
-    <p class="lead">Beschreibe deine Website in einfachen Worten. Der Baukasten formt daraus einen fertigen Auftrag für Google AI Studio.</p>
+    <h1>Prompt-Baukasten</h1>
+    <p class="lead">Beschreibe in einfachen Worten, was du bauen willst — eine Website oder eine kleine App. Der Baukasten formt daraus einen fertigen Auftrag für Google AI Studio.</p>
     <ol class="steps">
       <li><b>01</b> Ausfüllen</li>
       <li><b>02</b> Kopieren</li>
@@ -109,17 +109,25 @@
       <p class="sec">Deine Angaben</p>
 
       <div class="field">
-        <label class="lbl" for="art">Art der Website</label>
+        <label class="lbl" for="art">Was möchtest du bauen?</label>
         <select id="art">
           <option value="">Bitte wählen …</option>
-          <option>Persönliche Seite / Portfolio</option>
-          <option>Verein oder Club</option>
-          <option>Kleines Business / Dienstleistung</option>
-          <option>Restaurant / Café</option>
-          <option>Event oder Anlass</option>
-          <option>Blog / Magazin</option>
-          <option>Landing-Page für ein Produkt</option>
-          <option>Etwas anderes</option>
+          <optgroup label="Website">
+            <option>Persönliche Seite / Portfolio</option>
+            <option>Verein oder Club</option>
+            <option>Kleines Business / Dienstleistung</option>
+            <option>Restaurant / Café</option>
+            <option>Event oder Anlass</option>
+            <option>Blog / Magazin</option>
+            <option>Landing-Page für ein Produkt</option>
+          </optgroup>
+          <optgroup label="App / Tool">
+            <option>Quiz oder Test</option>
+            <option>Rechner (z. B. Preis oder Trinkgeld)</option>
+            <option>To-do- / Checklisten-App</option>
+            <option>Kleines Spiel</option>
+            <option>Anderes Mini-Tool</option>
+          </optgroup>
         </select>
       </div>
 
@@ -222,7 +230,7 @@
           <li>Mit Google-Konto anmelden.</li>
           <li>Im Bereich <b>Build</b> ins Eingabefeld klicken.</li>
           <li>Prompt einfügen und abschicken.</li>
-          <li>Rechts erscheint deine Website. Änderungen als nächste Nachricht.</li>
+          <li>Rechts erscheint dein Ergebnis. Änderungen als nächste Nachricht.</li>
         </ol>
       </div>
 
@@ -252,8 +260,10 @@
     const inhalte=checked("inhalte"), stil=checked("stil"), funktionen=checked("funktionen");
     if(!art && !titel && !zweck && !ziel && !inhalte.length && !stil.length) return PLACEHOLDER;
 
-    let p="Erstelle eine moderne, einsatzbereite Website.\n\n";
-    if(art)     p+="**Art der Website:** "+art+"\n";
+    const APP=["Quiz oder Test","Rechner (z. B. Preis oder Trinkgeld)","To-do- / Checklisten-App","Kleines Spiel","Anderes Mini-Tool"];
+    const isApp=APP.includes(art);
+    let p=isApp ? "Erstelle eine moderne, einsatzbereite Web-App.\n\n" : "Erstelle eine moderne, einsatzbereite Website.\n\n";
+    if(art)     p+=(isApp?"**Art der App / des Tools:** ":"**Art der Website:** ")+art+"\n";
     if(titel)   p+="**Name / Titel:** "+titel+"\n";
     if(sprache) p+="**Sprache der Inhalte:** "+sprache+"\n";
     p+="\n";

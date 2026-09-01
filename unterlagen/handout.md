@@ -1,8 +1,8 @@
-# Eigene Website mit Google AI Studio
+# Website oder kleine App mit Google AI Studio
 
 *Handout für Teilnehmende*
 
-Kein Programmieren nötig — du beschreibst deine Website, die KI baut sie.
+Kein Programmieren nötig — du beschreibst, was du willst (eine Website oder eine kleine App), die KI baut es.
 
 ---
 
@@ -24,3 +24,5 @@ Auf „Google AI Studio ↗" klicken, mit Google-Konto anmelden, im Bereich **Bu
 **Etwas ändern?** Einfach als nächste Nachricht schreiben, z. B. „Mach die Kopfzeile grösser" oder „wärmere Farben".
 
 **Tipps:** Konkret bleiben („freundlich, kurze Texte"). Eigene Bilder sind nicht nötig — AI Studio erzeugt passende.
+
+**Auch möglich:** eine kleine App bauen — z. B. ein Quiz oder einen Rechner. Gleiches Vorgehen, im Baukasten einfach unter „Was möchtest du bauen?" wählen.

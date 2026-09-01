@@ -2,8 +2,8 @@
 
 Material für eine SVEB-Minilektion (Micro-Teaching, 20–25 Min.) für **absolute Einsteiger:innen**.
 Kernstück ist ein **Prompt-Baukasten**: eine einzelne HTML-Datei, in der die Teilnehmenden per
-geführten Fragen einen Website-Auftrag («Prompt») zusammenstellen, kopieren und in
-[Google AI Studio](https://aistudio.google.com/apps) (Build-Modus) einfügen.
+geführten Fragen einen Auftrag («Prompt») für eine Website oder kleine App zusammenstellen,
+kopieren und in [Google AI Studio](https://aistudio.google.com/apps) (Build-Modus) einfügen.
 
 🔗 **Live:** https://criseone.github.io/meine-website-ai-studio/
 
