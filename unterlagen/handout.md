@@ -1,43 +1,26 @@
-# Meine eigene Website mit Google AI Studio — in 3 Schritten
+# Eigene Website mit Google AI Studio
 
-*Handout für Teilnehmende · Minilektion*
+*Handout für Teilnehmende*
 
-Du brauchst kein Programmieren zu können. Du beschreibst deine Website in normaler Sprache –
-Google AI Studio baut sie für dich.
+Kein Programmieren nötig — du beschreibst deine Website, die KI baut sie.
 
 ---
 
-## Schritt 1 — Auftrag zusammenstellen
-Öffne den **Prompt-Baukasten** (am Handy QR-Code scannen):
+**1 · Auftrag bauen**
+Baukasten öffnen (QR scannen), Felder ausfüllen — der Prompt entsteht automatisch.
 
-🔗 **https://criseone.github.io/meine-website-ai-studio/**
+**criseone.github.io/meine-website-ai-studio**
 
 ![QR-Code zum Baukasten](../qr.png)
 
-Fülle die Felder aus (Art der Website, Name, Zweck, Inhalte, Stil …).
-Rechts entsteht automatisch dein fertiger Auftrag («Prompt»).
+**2 · Prompt kopieren**
+Auf „Prompt kopieren" klicken.
 
-## Schritt 2 — Prompt kopieren
-Klick auf **«📋 Prompt kopieren»**.
-(Oder **«⬇︎ Als .md exportieren»**, um ihn als Datei zu speichern.)
-
-## Schritt 3 — In Google AI Studio einfügen
-1. Auf **«↗ Google AI Studio öffnen»** klicken → mit Google-Konto anmelden.
-2. Im Bereich **Build** in das grosse Eingabefeld klicken.
-3. Deinen Prompt **einfügen** und abschicken.
-4. Rechts erscheint live deine **Website-Vorschau**. 🎉
+**3 · In AI Studio einfügen**
+Auf „Google AI Studio ↗" klicken, mit Google-Konto anmelden, im Bereich **Build** einfügen und abschicken. Die Vorschau erscheint rechts.
 
 ---
 
-## Gefällt dir etwas nicht?
-Schreib einfach als nächste Nachricht, was geändert werden soll, z. B.:
-- «Mach die Kopfzeile grösser.»
-- «Verwende wärmere Farben.»
-- «Füge eine Seite mit Öffnungszeiten hinzu.»
+**Etwas ändern?** Einfach als nächste Nachricht schreiben, z. B. „Mach die Kopfzeile grösser" oder „wärmere Farben".
 
-## Gut zu wissen
-- Du brauchst **keine eigenen Bilder** – AI Studio kann passende Bilder selbst erzeugen.
-- **Sei konkret:** «freundlich, kurze Texte» wirkt besser als nur «schön».
-- Im Baukasten bleiben alle Eingaben **nur in deinem Browser**.
-
-**Link zum Baukasten:** https://criseone.github.io/meine-website-ai-studio/
+**Tipps:** Konkret bleiben („freundlich, kurze Texte"). Eigene Bilder sind nicht nötig — AI Studio erzeugt passende.

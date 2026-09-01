@@ -6,107 +6,110 @@
 <title>Website-Prompt-Baukasten · für Google AI Studio</title>
 <style>
   :root{
-    --bg:#0f172a; --bg2:#1e293b; --card:#ffffff; --ink:#0f172a; --muted:#64748b;
-    --line:#e2e8f0; --brand:#4f46e5; --brand2:#7c3aed; --accent:#0ea5e9;
-    --ok:#16a34a; --soft:#f1f5f9; --chipbg:#eef2ff; --radius:14px;
+    --paper:#ffffff; --ink:#121316; --muted:#71717a; --line:#e4e4e7;
+    --panel:#f4f4f5; --accent:#2563eb; --r:10px;
   }
   *{box-sizing:border-box}
-  html,body{margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
   body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    color:var(--ink); background:linear-gradient(180deg,#0f172a 0%,#1e293b 320px,#f8fafc 320px,#f8fafc 100%);
-    line-height:1.55; -webkit-font-smoothing:antialiased;
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55; font-size:16px; letter-spacing:-0.01em;
   }
-  .wrap{max-width:1060px;margin:0 auto;padding:28px 18px 80px}
-  header.top{color:#fff;padding:14px 4px 26px}
-  .badge{display:inline-block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;
-    background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);
-    padding:5px 11px;border-radius:999px;margin-bottom:14px}
-  header.top h1{font-size:1.9rem;line-height:1.2;margin:.1em 0 .35em;font-weight:800}
-  header.top p{margin:0;max-width:640px;color:#cbd5e1;font-size:1.02rem}
-  .steps{display:flex;gap:14px;flex-wrap:wrap;margin-top:20px}
-  .step{display:flex;align-items:center;gap:8px;color:#e2e8f0;font-size:.86rem;
-    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
-    padding:7px 12px;border-radius:10px}
-  .step b{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;
-    background:#fff;color:var(--brand);font-size:.78rem;font-weight:800}
+  .wrap{max-width:1060px; margin:0 auto; padding:72px 24px 96px}
+  .eyebrow{font-size:12px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); margin:0 0 18px}
+  h1{font-size:clamp(30px,5vw,44px); font-weight:700; letter-spacing:-0.03em; line-height:1.05; margin:0 0 16px}
+  .lead{font-size:18px; color:#3f3f46; margin:0; max-width:60ch}
+  .steps{display:flex; gap:22px; flex-wrap:wrap; margin:28px 0 0; padding:0; list-style:none;
+    font-size:13px; color:var(--muted)}
+  .steps li{display:flex; gap:8px; align-items:baseline}
+  .steps b{font-variant-numeric:tabular-nums; color:var(--ink); font-weight:600}
+  .rule{height:1px; background:var(--line); border:0; margin:44px 0}
 
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
-  @media(max-width:880px){.grid{grid-template-columns:1fr}}
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start}
+  @media(max-width:860px){.grid{grid-template-columns:1fr; gap:40px} .wrap{padding:48px 20px 72px}}
 
-  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-    padding:22px;box-shadow:0 10px 30px -18px rgba(15,23,42,.4)}
-  .card h2{font-size:1.05rem;margin:0 0 4px;font-weight:800}
-  .card .hint{color:var(--muted);font-size:.86rem;margin:0 0 18px}
-
-  .field{margin-bottom:18px}
-  label.lbl{display:block;font-weight:700;font-size:.9rem;margin-bottom:6px}
-  label.lbl .opt{font-weight:500;color:var(--muted);font-size:.82rem}
+  .sec{font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--muted);
+    margin:0 0 20px; padding-bottom:10px; border-bottom:1px solid var(--line)}
+  .field{margin-bottom:22px}
+  label.lbl{display:block; font-weight:600; font-size:14px; margin-bottom:8px}
+  label.lbl .opt{font-weight:400; color:var(--muted)}
   input[type=text],textarea,select{
-    width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;
-    font:inherit;color:var(--ink);background:#fff;outline:none;transition:border .15s,box-shadow .15s}
-  textarea{min-height:78px;resize:vertical}
-  input:focus,textarea:focus,select:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(79,70,229,.15)}
-  .chips{display:flex;flex-wrap:wrap;gap:8px}
-  .chip{position:relative;cursor:pointer;user-select:none}
-  .chip input{position:absolute;opacity:0;inset:0;cursor:pointer}
-  .chip span{display:inline-block;padding:8px 13px;border-radius:999px;border:1px solid var(--line);
-    background:var(--soft);font-size:.86rem;transition:.15s}
-  .chip input:checked + span{background:var(--chipbg);border-color:var(--brand);color:var(--brand);font-weight:600}
-  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  @media(max-width:520px){.row2{grid-template-columns:1fr}}
+    width:100%; padding:11px 12px; border:1px solid var(--line); border-radius:var(--r);
+    font:inherit; letter-spacing:-0.01em; color:var(--ink); background:var(--paper); outline:none;
+    transition:border-color .12s, box-shadow .12s}
+  textarea{min-height:76px; resize:vertical}
+  input::placeholder,textarea::placeholder{color:#a1a1aa}
+  input:focus,textarea:focus,select:focus{border-color:var(--ink); box-shadow:0 0 0 3px rgba(37,99,235,.14)}
+  select{appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2371717a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; padding-right:34px}
 
-  .out{position:sticky;top:16px}
-  .promptbox{white-space:pre-wrap;word-break:break-word;background:#0f172a;color:#e2e8f0;
-    border-radius:10px;padding:16px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-    font-size:.83rem;line-height:1.5;max-height:420px;overflow:auto;border:1px solid #1e293b}
-  .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
-  button.act,a.act{appearance:none;border:0;cursor:pointer;font:inherit;font-weight:700;
-    padding:11px 16px;border-radius:10px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;
-    transition:transform .06s, filter .15s}
-  button.act:active,a.act:active{transform:translateY(1px)}
-  .primary{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff}
-  .ghost{background:#fff;border:1px solid var(--line)!important;color:var(--ink)}
-  .go{background:linear-gradient(135deg,#0ea5e9,#2563eb);color:#fff}
-  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);
-    background:var(--ok);color:#fff;padding:11px 18px;border-radius:10px;font-weight:600;
-    opacity:0;pointer-events:none;transition:.25s;z-index:50;box-shadow:0 8px 24px -8px rgba(0,0,0,.4)}
-  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-  .mini{font-size:.8rem;color:var(--muted);margin-top:12px}
-  .stepsmall{font-size:.82rem;color:var(--muted);margin:14px 0 0;padding:14px 0 0;border-top:1px dashed var(--line)}
-  .stepsmall ol{margin:8px 0 0;padding-left:20px}
-  .stepsmall li{margin-bottom:5px}
-  details.tips{margin-top:14px;background:var(--soft);border-radius:10px;padding:4px 14px}
-  details.tips summary{cursor:pointer;font-weight:700;font-size:.88rem;padding:10px 0}
-  details.tips ul{margin:0 0 12px;padding-left:18px;font-size:.86rem;color:#334155}
-  footer{color:var(--muted);font-size:.8rem;text-align:center;margin-top:34px}
+  .chips{display:flex; flex-wrap:wrap; gap:8px}
+  .chip{position:relative; cursor:pointer; user-select:none}
+  .chip input{position:absolute; opacity:0; inset:0; cursor:pointer; margin:0}
+  .chip span{display:inline-block; padding:7px 13px; border-radius:999px; border:1px solid var(--line);
+    background:var(--paper); font-size:13.5px; color:#3f3f46; transition:.12s}
+  .chip input:hover + span{border-color:#a1a1aa}
+  .chip input:checked + span{background:var(--ink); border-color:var(--ink); color:#fff}
+  .chip input:focus-visible + span{box-shadow:0 0 0 3px rgba(37,99,235,.2)}
+  .row2{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+  @media(max-width:520px){.row2{grid-template-columns:1fr}}
+  .minibtns{display:flex; gap:18px; margin-top:4px}
+  .link{background:none; border:0; padding:0; font:inherit; color:var(--muted); cursor:pointer;
+    text-decoration:underline; text-underline-offset:3px; text-decoration-color:var(--line)}
+  .link:hover{color:var(--ink)}
+
+  .out{position:sticky; top:32px}
+  .promptbox{white-space:pre-wrap; word-break:break-word; background:var(--ink); color:#e7e7ea;
+    border-radius:var(--r); padding:20px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    font-size:13px; line-height:1.6; max-height:400px; overflow:auto}
+  .promptbox.empty{color:#a1a1aa}
+  .btns{display:flex; flex-wrap:wrap; gap:10px; margin-top:16px}
+  button.act,a.act{appearance:none; cursor:pointer; font:inherit; font-weight:600; font-size:14.5px;
+    padding:11px 18px; border-radius:var(--r); text-decoration:none; display:inline-flex; align-items:center;
+    gap:7px; border:1px solid var(--ink); transition:.12s}
+  .primary{background:var(--ink); color:#fff}
+  .primary:hover{background:#000}
+  .ghost{background:var(--paper); color:var(--ink)}
+  .ghost:hover{background:var(--panel)}
+  a.go{margin-left:auto; border:0; color:var(--accent); padding:11px 4px}
+  a.go:hover{text-decoration:underline; text-underline-offset:3px}
+
+  .how{margin-top:28px}
+  .how h3{font-size:13px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin:0 0 12px}
+  .how ol{margin:0; padding-left:0; list-style:none; counter-reset:s}
+  .how li{counter-increment:s; position:relative; padding:0 0 0 30px; margin-bottom:9px; font-size:14px; color:#3f3f46}
+  .how li::before{content:counter(s,decimal-leading-zero); position:absolute; left:0; top:0;
+    font-variant-numeric:tabular-nums; font-weight:600; color:var(--ink); font-size:12px}
+  .note{margin-top:24px; font-size:13px; color:var(--muted)}
+  .toast{position:fixed; left:50%; bottom:28px; transform:translateX(-50%) translateY(16px);
+    background:var(--ink); color:#fff; padding:11px 18px; border-radius:var(--r); font-size:14px; font-weight:500;
+    opacity:0; pointer-events:none; transition:.2s; z-index:50}
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <header class="top">
-    <span class="badge">Minilektion · Eigene Website mit Google AI Studio</span>
-    <h1>Der Website-Prompt-Baukasten</h1>
-    <p>Beantworte ein paar einfache Fragen über deine Website. Der Baukasten formt daraus
-       automatisch einen sauberen Auftrag (Prompt). Diesen kopierst du und fügst ihn in
-       Google AI Studio ein – fertig ist deine erste Website. Kein Programmieren nötig.</p>
-    <div class="steps">
-      <div class="step"><b>1</b> Fragen ausfüllen</div>
-      <div class="step"><b>2</b> Prompt kopieren</div>
-      <div class="step"><b>3</b> In AI Studio einfügen</div>
-    </div>
+  <header>
+    <p class="eyebrow">Minilektion</p>
+    <h1>Website-Prompt-Baukasten</h1>
+    <p class="lead">Beschreibe deine Website in einfachen Worten. Der Baukasten formt daraus einen fertigen Auftrag für Google AI Studio.</p>
+    <ol class="steps">
+      <li><b>01</b> Ausfüllen</li>
+      <li><b>02</b> Kopieren</li>
+      <li><b>03</b> In AI Studio einfügen</li>
+    </ol>
   </header>
+
+  <hr class="rule">
 
   <div class="grid">
 
-    <!-- LINKE SPALTE: FORMULAR -->
-    <section class="card">
-      <h2>Deine Angaben</h2>
-      <p class="hint">Du musst nicht alles ausfüllen. Je mehr du sagst, desto genauer wird die Website.</p>
+    <section>
+      <p class="sec">Deine Angaben</p>
 
       <div class="field">
-        <label class="lbl" for="art">Was für eine Website ist es?</label>
+        <label class="lbl" for="art">Art der Website</label>
         <select id="art">
           <option value="">Bitte wählen …</option>
           <option>Persönliche Seite / Portfolio</option>
@@ -121,26 +124,26 @@
       </div>
 
       <div class="field">
-        <label class="lbl" for="titel">Name oder Titel der Website</label>
-        <input type="text" id="titel" placeholder="z. B. «Tischlerei Holzwurm» oder «Anna Muster»">
+        <label class="lbl" for="titel">Name / Titel</label>
+        <input type="text" id="titel" placeholder="z. B. Tischlerei Holzwurm">
       </div>
 
       <div class="field">
-        <label class="lbl" for="zweck">Worum geht es? Was soll die Website erreichen?</label>
-        <textarea id="zweck" placeholder="z. B. Ich verkaufe handgemachte Möbel und möchte, dass Leute mich kontaktieren und meine Arbeiten sehen."></textarea>
+        <label class="lbl" for="zweck">Worum geht es?</label>
+        <textarea id="zweck" placeholder="Was soll die Website erreichen? Ein, zwei Sätze genügen."></textarea>
       </div>
 
       <div class="field">
-        <label class="lbl" for="ziel">Für wen ist die Website? <span class="opt">(Zielgruppe)</span></label>
-        <input type="text" id="ziel" placeholder="z. B. Familien aus der Region, junge Leute, Firmenkunden">
+        <label class="lbl" for="ziel">Für wen? <span class="opt">Zielgruppe</span></label>
+        <input type="text" id="ziel" placeholder="z. B. Familien aus der Region">
       </div>
 
       <div class="field">
-        <label class="lbl">Welche Seiten / Inhalte soll es geben?</label>
+        <label class="lbl">Seiten / Inhalte</label>
         <div class="chips" id="inhalte">
           <label class="chip"><input type="checkbox" value="Startseite mit Begrüssung"><span>Startseite</span></label>
           <label class="chip"><input type="checkbox" value="Über mich / Über uns"><span>Über mich/uns</span></label>
-          <label class="chip"><input type="checkbox" value="Angebot / Leistungen"><span>Angebot/Leistungen</span></label>
+          <label class="chip"><input type="checkbox" value="Angebot / Leistungen"><span>Angebot</span></label>
           <label class="chip"><input type="checkbox" value="Foto-Galerie"><span>Galerie</span></label>
           <label class="chip"><input type="checkbox" value="Preise"><span>Preise</span></label>
           <label class="chip"><input type="checkbox" value="Öffnungszeiten"><span>Öffnungszeiten</span></label>
@@ -152,7 +155,7 @@
       </div>
 
       <div class="field">
-        <label class="lbl">Wie soll es aussehen? <span class="opt">(Stil)</span></label>
+        <label class="lbl">Stil</label>
         <div class="chips" id="stil">
           <label class="chip"><input type="checkbox" value="modern"><span>Modern</span></label>
           <label class="chip"><input type="checkbox" value="minimalistisch und aufgeräumt"><span>Minimalistisch</span></label>
@@ -166,11 +169,11 @@
 
       <div class="field row2">
         <div>
-          <label class="lbl" for="farbe">Wunschfarbe <span class="opt">(optional)</span></label>
-          <input type="text" id="farbe" placeholder="z. B. Dunkelgrün, Blau …">
+          <label class="lbl" for="farbe">Farbe <span class="opt">optional</span></label>
+          <input type="text" id="farbe" placeholder="z. B. Dunkelgrün">
         </div>
         <div>
-          <label class="lbl" for="sprache">Sprache der Website</label>
+          <label class="lbl" for="sprache">Sprache</label>
           <select id="sprache">
             <option>Deutsch</option>
             <option>Schweizerdeutsch (Standarddeutsch, locker)</option>
@@ -182,71 +185,54 @@
       </div>
 
       <div class="field">
-        <label class="lbl">Besondere Funktionen <span class="opt">(optional)</span></label>
+        <label class="lbl">Funktionen <span class="opt">optional</span></label>
         <div class="chips" id="funktionen">
           <label class="chip"><input type="checkbox" value="ein Kontaktformular"><span>Kontaktformular</span></label>
           <label class="chip"><input type="checkbox" value="eine Karte mit dem Standort"><span>Standort-Karte</span></label>
-          <label class="chip"><input type="checkbox" value="Verlinkungen zu Social Media"><span>Social-Media-Links</span></label>
-          <label class="chip"><input type="checkbox" value="ein gut sichtbarer Knopf zum Anrufen oder Buchen"><span>Anruf/Buchen-Knopf</span></label>
+          <label class="chip"><input type="checkbox" value="Verlinkungen zu Social Media"><span>Social-Media</span></label>
+          <label class="chip"><input type="checkbox" value="ein gut sichtbarer Knopf zum Anrufen oder Buchen"><span>Anruf/Buchen</span></label>
           <label class="chip"><input type="checkbox" value="optimiert für Handy und Computer"><span>Handy-tauglich</span></label>
           <label class="chip"><input type="checkbox" value="ein Newsletter-Anmeldefeld"><span>Newsletter</span></label>
         </div>
       </div>
 
       <div class="field">
-        <label class="lbl" for="extra">Sonstige Wünsche <span class="opt">(optional)</span></label>
-        <textarea id="extra" placeholder="z. B. Bitte ein grosses Foto ganz oben, freundlicher Ton, kurze Texte."></textarea>
+        <label class="lbl" for="extra">Sonstige Wünsche <span class="opt">optional</span></label>
+        <textarea id="extra" placeholder="z. B. grosses Foto oben, kurze Texte"></textarea>
       </div>
 
-      <div class="btns">
-        <button class="act ghost" id="btnBeispiel">Beispiel laden</button>
-        <button class="act ghost" id="btnReset">Zurücksetzen</button>
+      <div class="minibtns">
+        <button class="link" id="btnBeispiel">Beispiel laden</button>
+        <button class="link" id="btnReset">Zurücksetzen</button>
       </div>
     </section>
 
-    <!-- RECHTE SPALTE: PROMPT-AUSGABE -->
     <section class="out">
-      <div class="card">
-        <h2>Dein fertiger Prompt</h2>
-        <p class="hint">Das ist der Auftrag für Google AI Studio. Er wird live aktualisiert.</p>
-        <div class="promptbox" id="prompt">Fülle links die Felder aus – hier erscheint dein Prompt.</div>
-        <div class="btns">
-          <button class="act primary" id="btnCopy">📋 Prompt kopieren</button>
-          <button class="act ghost" id="btnExport">⬇︎ Als .md exportieren</button>
-          <a class="act go" href="https://aistudio.google.com/apps" target="_blank" rel="noopener">↗ Google AI Studio öffnen</a>
-        </div>
-
-        <div class="stepsmall">
-          <strong>So geht's in Google AI Studio:</strong>
-          <ol>
-            <li>Auf «Google AI Studio öffnen» klicken (mit Google-Konto anmelden).</li>
-            <li>Im Bereich <em>Build</em> in das grosse Eingabefeld klicken.</li>
-            <li>Deinen kopierten Prompt einfügen und abschicken.</li>
-            <li>Rechts erscheint live deine Website – Änderungen einfach als nächste Nachricht schreiben.</li>
-          </ol>
-        </div>
-
-        <details class="tips">
-          <summary>💡 Tipps für einen guten Prompt</summary>
-          <ul>
-            <li>Sei konkret: «freundlich, kurze Texte» ist besser als «schön».</li>
-            <li>Ein Wunsch nach dem anderen – du kannst danach immer weiter anpassen.</li>
-            <li>Gefällt etwas nicht? Schreib einfach: «Mach die Kopfzeile grösser».</li>
-            <li>Du brauchst kein fertiges Bild – AI Studio kann Bilder selbst erzeugen.</li>
-          </ul>
-        </details>
-        <p class="mini">🔒 Alle Eingaben bleiben nur in deinem Browser. Nichts wird hochgeladen.</p>
+      <p class="sec">Dein Prompt</p>
+      <div class="promptbox empty" id="prompt">Fülle links die Felder aus – hier erscheint dein Prompt.</div>
+      <div class="btns">
+        <button class="act primary" id="btnCopy">Prompt kopieren</button>
+        <button class="act ghost" id="btnExport">Als .md</button>
+        <a class="act go" href="https://aistudio.google.com/apps" target="_blank" rel="noopener">Google AI Studio ↗</a>
       </div>
+
+      <div class="how">
+        <h3>In AI Studio</h3>
+        <ol>
+          <li>Mit Google-Konto anmelden.</li>
+          <li>Im Bereich <b>Build</b> ins Eingabefeld klicken.</li>
+          <li>Prompt einfügen und abschicken.</li>
+          <li>Rechts erscheint deine Website. Änderungen als nächste Nachricht.</li>
+        </ol>
+      </div>
+
+      <p class="note">Alle Eingaben bleiben nur in deinem Browser.</p>
     </section>
 
   </div>
-
-  <footer>
-    Website-Prompt-Baukasten · Minilektion SVEB · läuft komplett offline im Browser.
-  </footer>
 </div>
 
-<div class="toast" id="toast">Kopiert!</div>
+<div class="toast" id="toast">Kopiert</div>
 
 <script>
 (function(){
@@ -254,181 +240,94 @@
   const $ = s => document.querySelector(s);
   const ids = ["art","titel","zweck","ziel","farbe","sprache","extra"];
   const groups = ["inhalte","stil","funktionen"];
-  const STORE = "wpb_v1";
+  const STORE = "wpb_v2";
+  const PLACEHOLDER = "Fülle links die Felder aus – hier erscheint dein Prompt.";
 
-  function checked(group){
-    return [...document.querySelectorAll("#"+group+" input:checked")].map(i=>i.value);
-  }
-  function list(arr){
-    if(arr.length===0) return "";
-    if(arr.length===1) return arr[0];
-    return arr.slice(0,-1).join(", ") + " und " + arr[arr.length-1];
-  }
+  const checked = g => [...document.querySelectorAll("#"+g+" input:checked")].map(i=>i.value);
+  const list = a => a.length<2 ? (a[0]||"") : a.slice(0,-1).join(", ")+" und "+a[a.length-1];
 
   function buildPrompt(){
-    const art = $("#art").value.trim();
-    const titel = $("#titel").value.trim();
-    const zweck = $("#zweck").value.trim();
-    const ziel = $("#ziel").value.trim();
-    const farbe = $("#farbe").value.trim();
-    const sprache = $("#sprache").value.trim();
-    const extra = $("#extra").value.trim();
-    const inhalte = checked("inhalte");
-    const stil = checked("stil");
-    const funktionen = checked("funktionen");
+    const v = id => $("#"+id).value.trim();
+    const art=v("art"),titel=v("titel"),zweck=v("zweck"),ziel=v("ziel"),farbe=v("farbe"),sprache=v("sprache"),extra=v("extra");
+    const inhalte=checked("inhalte"), stil=checked("stil"), funktionen=checked("funktionen");
+    if(!art && !titel && !zweck && !ziel && !inhalte.length && !stil.length) return PLACEHOLDER;
 
-    // Wenn praktisch leer -> Platzhalter
-    const leer = !art && !titel && !zweck && !ziel && inhalte.length===0 && stil.length===0;
-    if(leer){
-      return "Fülle links die Felder aus – hier erscheint dein Prompt.";
-    }
-
-    let p = "Erstelle eine moderne, einsatzbereite Website.\n\n";
-
-    if(art)    p += "**Art der Website:** " + art + "\n";
-    if(titel)  p += "**Name / Titel:** " + titel + "\n";
-    if(sprache)p += "**Sprache der Inhalte:** " + sprache + "\n";
-    p += "\n";
-
-    if(zweck)  p += "**Ziel der Website:**\n" + zweck + "\n\n";
-    if(ziel)   p += "**Zielgruppe (für wen):** " + ziel + "\n\n";
-
-    if(inhalte.length){
-      p += "**Diese Seiten / Bereiche sollen enthalten sein:**\n";
-      inhalte.forEach(i => p += "- " + i + "\n");
-      p += "\n";
-    }
-
-    if(stil.length){
-      p += "**Stil und Aussehen:** " + list(stil) + ".\n";
-    }
-    if(farbe){
-      p += "**Bevorzugte Farbe / Farbwelt:** " + farbe + ".\n";
-    }
-    if(stil.length || farbe) p += "\n";
-
-    if(funktionen.length){
-      p += "**Zusätzliche Funktionen:**\n";
-      funktionen.forEach(f => p += "- " + f + "\n");
-      p += "\n";
-    }
-
-    if(extra){
-      p += "**Weitere Wünsche:**\n" + extra + "\n\n";
-    }
-
-    p += "**Wichtig:**\n";
-    p += "- Die Website soll auf dem Handy und auf dem Computer gut aussehen.\n";
-    p += "- Verwende passende, professionell wirkende Beispieltexte und passende Bilder.\n";
-    p += "- Halte die Bedienung einfach und übersichtlich.\n";
-
+    let p="Erstelle eine moderne, einsatzbereite Website.\n\n";
+    if(art)     p+="**Art der Website:** "+art+"\n";
+    if(titel)   p+="**Name / Titel:** "+titel+"\n";
+    if(sprache) p+="**Sprache der Inhalte:** "+sprache+"\n";
+    p+="\n";
+    if(zweck)   p+="**Ziel der Website:**\n"+zweck+"\n\n";
+    if(ziel)    p+="**Zielgruppe:** "+ziel+"\n\n";
+    if(inhalte.length){ p+="**Seiten / Bereiche:**\n"; inhalte.forEach(i=>p+="- "+i+"\n"); p+="\n"; }
+    if(stil.length)  p+="**Stil:** "+list(stil)+".\n";
+    if(farbe)        p+="**Farbwelt:** "+farbe+".\n";
+    if(stil.length||farbe) p+="\n";
+    if(funktionen.length){ p+="**Funktionen:**\n"; funktionen.forEach(f=>p+="- "+f+"\n"); p+="\n"; }
+    if(extra)   p+="**Weitere Wünsche:**\n"+extra+"\n\n";
+    p+="**Wichtig:**\n- Auf Handy und Computer gut aussehen.\n- Passende Beispieltexte und Bilder verwenden.\n- Bedienung einfach und übersichtlich halten.";
     return p.trim();
   }
 
   function render(){
-    $("#prompt").textContent = buildPrompt();
+    const t=buildPrompt(), box=$("#prompt");
+    box.textContent=t; box.classList.toggle("empty", t===PLACEHOLDER);
     save();
   }
+  function save(){ try{
+    const d={f:{},g:{}};
+    ids.forEach(id=>d.f[id]=$("#"+id).value);
+    groups.forEach(g=>d.g[g]=checked(g));
+    localStorage.setItem(STORE,JSON.stringify(d));
+  }catch(e){} }
+  function load(){ try{
+    const raw=localStorage.getItem(STORE); if(!raw) return;
+    const d=JSON.parse(raw);
+    ids.forEach(id=>{ if(d.f&&d.f[id]!=null)$("#"+id).value=d.f[id]; });
+    groups.forEach(g=>{ const vals=(d.g&&d.g[g])||[];
+      document.querySelectorAll("#"+g+" input").forEach(i=>i.checked=vals.includes(i.value)); });
+  }catch(e){} }
+  function toast(m){ const t=$("#toast"); t.textContent=m; t.classList.add("show");
+    clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("show"),1500); }
+  function setChecks(g,vals){ document.querySelectorAll("#"+g+" input").forEach(i=>i.checked=vals.includes(i.value)); }
 
-  function save(){
-    try{
-      const data = {f:{}, g:{}};
-      ids.forEach(id => data.f[id] = $("#"+id).value);
-      groups.forEach(g => data.g[g] = checked(g));
-      localStorage.setItem(STORE, JSON.stringify(data));
-    }catch(e){/* localStorage evtl. blockiert – egal */}
-  }
-
-  function load(){
-    try{
-      const raw = localStorage.getItem(STORE);
-      if(!raw) return;
-      const data = JSON.parse(raw);
-      ids.forEach(id => { if(data.f && data.f[id]!=null) $("#"+id).value = data.f[id]; });
-      groups.forEach(g => {
-        const vals = (data.g && data.g[g]) || [];
-        document.querySelectorAll("#"+g+" input").forEach(i => i.checked = vals.includes(i.value));
-      });
-    }catch(e){}
-  }
-
-  function toast(msg){
-    const t = $("#toast"); t.textContent = msg; t.classList.add("show");
-    clearTimeout(t._t); t._t = setTimeout(()=>t.classList.remove("show"), 1600);
-  }
-
-  // Copy
   $("#btnCopy").addEventListener("click", async ()=>{
-    const text = buildPrompt();
-    if(text.startsWith("Fülle links")){ toast("Bitte zuerst ausfüllen"); return; }
-    try{
-      await navigator.clipboard.writeText(text);
-      toast("Prompt kopiert!");
-    }catch(e){
-      // Fallback
-      const ta = document.createElement("textarea");
-      ta.value = text; document.body.appendChild(ta); ta.select();
-      try{ document.execCommand("copy"); toast("Prompt kopiert!"); }
-      catch(err){ toast("Bitte manuell kopieren"); }
-      ta.remove();
-    }
+    const t=buildPrompt(); if(t===PLACEHOLDER){ toast("Bitte zuerst ausfüllen"); return; }
+    try{ await navigator.clipboard.writeText(t); toast("Prompt kopiert"); }
+    catch(e){ const ta=document.createElement("textarea"); ta.value=t; document.body.appendChild(ta); ta.select();
+      try{ document.execCommand("copy"); toast("Prompt kopiert"); }catch(err){ toast("Bitte manuell kopieren"); } ta.remove(); }
   });
-
-  // Export .md
   $("#btnExport").addEventListener("click", ()=>{
-    const text = buildPrompt();
-    if(text.startsWith("Fülle links")){ toast("Bitte zuerst ausfüllen"); return; }
-    const titel = ($("#titel").value.trim() || "website").toLowerCase()
-                    .replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"") || "website";
-    const blob = new Blob([text], {type:"text/markdown;charset=utf-8"});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url; a.download = "prompt-"+titel+".md";
-    document.body.appendChild(a); a.click(); a.remove();
-    URL.revokeObjectURL(url);
-    toast("Datei exportiert");
+    const t=buildPrompt(); if(t===PLACEHOLDER){ toast("Bitte zuerst ausfüllen"); return; }
+    const name=($("#titel").value.trim()||"website").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"")||"website";
+    const url=URL.createObjectURL(new Blob([t],{type:"text/markdown;charset=utf-8"}));
+    const a=document.createElement("a"); a.href=url; a.download="prompt-"+name+".md";
+    document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); toast("Exportiert");
   });
-
-  // Beispiel
   $("#btnBeispiel").addEventListener("click", ()=>{
-    $("#art").value = "Kleines Business / Dienstleistung";
-    $("#titel").value = "Velowerkstatt Pedal & Co.";
-    $("#zweck").value = "Wir reparieren Velos und E-Bikes in Bern. Die Website soll Vertrauen schaffen und Leute dazu bringen, einen Termin zu vereinbaren.";
-    $("#ziel").value = "Velofahrende aus Bern und Umgebung";
-    $("#farbe").value = "Dunkelgrün";
-    $("#sprache").value = "Deutsch";
-    $("#extra").value = "Freundlicher Ton, kurze Texte, ein grosses Foto der Werkstatt ganz oben.";
-    setChecks("inhalte", ["Startseite mit Begrüssung","Angebot / Leistungen","Preise","Öffnungszeiten","Kontakt"]);
-    setChecks("stil", ["modern","seriös und professionell"]);
-    setChecks("funktionen", ["ein Kontaktformular","eine Karte mit dem Standort","ein gut sichtbarer Knopf zum Anrufen oder Buchen","optimiert für Handy und Computer"]);
-    render();
-    toast("Beispiel geladen");
+    $("#art").value="Kleines Business / Dienstleistung";
+    $("#titel").value="Velowerkstatt Pedal & Co.";
+    $("#zweck").value="Wir reparieren Velos und E-Bikes in Bern und möchten, dass Leute einen Termin vereinbaren.";
+    $("#ziel").value="Velofahrende aus Bern und Umgebung";
+    $("#farbe").value="Dunkelgrün"; $("#sprache").value="Deutsch";
+    $("#extra").value="Freundlicher Ton, kurze Texte, grosses Foto der Werkstatt oben.";
+    setChecks("inhalte",["Startseite mit Begrüssung","Angebot / Leistungen","Preise","Öffnungszeiten","Kontakt"]);
+    setChecks("stil",["modern","seriös und professionell"]);
+    setChecks("funktionen",["ein Kontaktformular","eine Karte mit dem Standort","ein gut sichtbarer Knopf zum Anrufen oder Buchen","optimiert für Handy und Computer"]);
+    render(); toast("Beispiel geladen");
   });
-
-  function setChecks(group, vals){
-    document.querySelectorAll("#"+group+" input").forEach(i => i.checked = vals.includes(i.value));
-  }
-
-  // Reset
   $("#btnReset").addEventListener("click", ()=>{
     if(!confirm("Alle Eingaben löschen?")) return;
-    ids.forEach(id => { const el=$("#"+id); el.value = (el.tagName==="SELECT" && id==="sprache") ? "Deutsch" : ""; });
-    document.querySelectorAll(".chips input").forEach(i => i.checked = false);
+    ids.forEach(id=>{ const el=$("#"+id); el.value = id==="sprache" ? "Deutsch" : ""; });
+    document.querySelectorAll(".chips input").forEach(i=>i.checked=false);
     try{ localStorage.removeItem(STORE); }catch(e){}
-    render();
-    toast("Zurückgesetzt");
+    render(); toast("Zurückgesetzt");
   });
 
-  // Live-Update bei jeder Änderung
-  document.addEventListener("input", e => {
-    if(e.target.closest(".card")) render();
-  });
-  document.addEventListener("change", e => {
-    if(e.target.closest(".chips") || e.target.tagName==="SELECT") render();
-  });
+  document.addEventListener("input", e=>{ if(e.target.closest("section")) render(); });
+  document.addEventListener("change", e=>{ if(e.target.closest(".chips")||e.target.tagName==="SELECT") render(); });
 
-  load();
-  render();
+  load(); render();
 })();
 </script>
 </body>
