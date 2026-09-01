@@ -35,7 +35,7 @@ Beobachtbar formuliert. Die Teilnehmenden können …
 | 3′ | **A — Ausrichten** | Begrüssung, Einstiegsfrage, Ziele & Ablauf | Lehrgespräch | Folie | — |
 | 3′ | **R — Reaktivieren** | An KI-Erfahrung anknüpfen; Brücke: KI baut Websites | Plenum, Handzeichen | Beamer | 1 |
 | 5′ | **I — Informieren** | Was ist AI Studio; „guter Auftrag = gutes Ergebnis"; Demo mit **vorab generiertem** Beispiel | Input + Demo | Beamer, Baukasten | 1 |
-| 8′ | **V — Verarbeiten** | Eigenen Prompt bauen und Generierung **starten** (läuft weiter — nicht abwarten); 1–2 zeigen Prompt/Start | Einzel-/Partnerarbeit | Geräte, WLAN, Handout | 2, 3 |
+| 8′ | **V — Verarbeiten** | Eigenen Prompt bauen (Tipp: Schalter „Einfach & schnell") und Generierung **starten** (läuft weiter — nicht abwarten); 1–2 zeigen Prompt/Start | Einzel-/Partnerarbeit | Geräte, WLAN, Handout | 2, 3 |
 | 4′ | **A — Auswerten** | 3 Schritte + Einsatz nennen; Fragen; Abschluss | Murmelrunde, Plenum | Folie | 1–3 |
 
 **Gesamt 23′** — Schwerpunkt Verarbeiten. Reserve über Phase V steuerbar (s. Plan B).

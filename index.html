@@ -62,6 +62,9 @@
   .toggle{display:inline-flex; align-items:center; gap:10px; cursor:pointer; user-select:none; font-weight:600; font-size:14.5px}
   .toggle input{width:17px; height:17px; accent-color:var(--ink); cursor:pointer; margin:0}
   .toggle-hint{margin:8px 0 0; font-size:12.5px; color:var(--muted); max-width:52ch}
+  .field.locked{opacity:.4}
+  .field.locked .chips{pointer-events:none}
+  .field.locked #funk-opt{color:var(--ink)}
   .out{position:sticky; top:32px}
   .promptbox{white-space:pre-wrap; word-break:break-word; background:var(--ink); color:#e7e7ea;
     border-radius:var(--r); padding:20px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
@@ -114,7 +117,7 @@
 
       <div class="toggle-wrap">
         <label class="toggle"><input type="checkbox" id="simple"><span>Einfach &amp; schnell halten</span></label>
-        <p class="toggle-hint">Erzeugt einen schlankeren Auftrag (eine Seite, keine aufwendigen Extras) — ideal für einen schnellen ersten Versuch im Unterricht.</p>
+        <p class="toggle-hint">Macht die Website bewusst einfach — ideal für einen schnellen ersten Versuch.</p>
       </div>
 
       <div class="field">
@@ -201,8 +204,8 @@
         </div>
       </div>
 
-      <div class="field">
-        <label class="lbl">Funktionen <span class="opt">optional</span></label>
+      <div class="field" id="field-funktionen">
+        <label class="lbl">Funktionen <span class="opt" id="funk-opt">optional</span></label>
         <div class="chips" id="funktionen">
           <label class="chip"><input type="checkbox" value="ein Kontaktformular"><span>Kontaktformular</span></label>
           <label class="chip"><input type="checkbox" value="eine Karte mit dem Standort"><span>Standort-Karte</span></label>
@@ -285,12 +288,28 @@
     if(stil.length||farbe) p+="\n";
     if(funktionen.length){ p+="**Funktionen:**\n"; funktionen.forEach(f=>p+="- "+f+"\n"); p+="\n"; }
     if(extra)   p+="**Weitere Wünsche:**\n"+extra+"\n\n";
-    if(simple)  p+="**Einfach & schnell:** Als eine einzige Seite mit klaren Abschnitten umsetzen. Keine aufwendigen Extras, leichtgewichtig und schnell.\n\n";
-    p+="**Wichtig:**\n- Auf Handy und Computer gut aussehen.\n- Passende Beispieltexte und Bilder verwenden.\n- Bedienung einfach und übersichtlich halten.";
+    if(simple){
+      p+="**Einfach & schnell halten (Priorität, damit die Website schnell fertig ist):**\n";
+      p+="- Als **eine einzige HTML-Datei** (index.html), **ohne Backend** und **ohne npm-/Build-Schritt**.\n";
+      p+="- **Kein schweres JS-Framework mit Build** (kein React/Vue).\n";
+      p+="- **Keine KI-generierten Bilder** — stattdessen einfache Platzhalter, CSS-Flächen, Farben oder Emojis.\n";
+      p+="- Für ein **sauberes, fehlerfreies und responsives Layout Tailwind CSS über das Play-CDN** einbinden (ein einziges Script-Tag, kein Build-Schritt).\n";
+      p+="- Tailwind-Utility-Klassen für klare Abstände, Flexbox/Grid und Responsivität nutzen. Alles auf einer Seite.\n\n";
+      p+="**Wichtig:**\n- Auf Handy und Computer gut aussehen.\n- Klare, einfache Beispieltexte; für Bilder nur Platzhalter.\n- Bedienung einfach und übersichtlich halten.";
+    } else {
+      p+="**Wichtig:**\n- Auf Handy und Computer gut aussehen.\n- Passende Beispieltexte und Bilder verwenden.\n- Bedienung einfach und übersichtlich halten.";
+    }
     return p.trim();
   }
 
+  function applySimpleMode(){
+    const on=$("#simple").checked;
+    const field=$("#field-funktionen"); if(field) field.classList.toggle("locked", on);
+    const opt=$("#funk-opt"); if(opt) opt.textContent = on ? "· in einfacher Variante deaktiviert" : "optional";
+    document.querySelectorAll("#funktionen input").forEach(i=>{ i.disabled=on; if(on) i.checked=false; });
+  }
   function render(){
+    applySimpleMode();
     const t=buildPrompt(), box=$("#prompt");
     box.textContent=t; box.classList.toggle("empty", t===PLACEHOLDER);
     save();
