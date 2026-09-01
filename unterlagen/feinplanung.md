@@ -10,7 +10,7 @@
 
 ## 1 · Ausgangslage
 
-Viele wünschen sich eine eigene Website, scheuen aber Technik und Aufwand. Google AI Studio baut eine Website aus einer einfachen Beschreibung. Die Teilnehmenden formulieren mit einem Prompt-Baukasten ihren Auftrag und sehen live ein Ergebnis — niederschwelliger Einstieg mit sofortigem Erfolgserlebnis.
+Viele wünschen sich eine eigene Website, scheuen aber Technik und Aufwand. Google AI Studio baut eine Website aus einer einfachen Beschreibung. Die Teilnehmenden formulieren mit einem Prompt-Baukasten ihren Auftrag und starten damit in Google AI Studio eine erste Website — niederschwelliger Einstieg mit Erfolgserlebnis.
 
 ---
 
@@ -34,11 +34,13 @@ Beobachtbar formuliert. Die Teilnehmenden können …
 |---|---|---|---|---|---|
 | 3′ | **A — Ausrichten** | Begrüssung, Einstiegsfrage, Ziele & Ablauf | Lehrgespräch | Folie | — |
 | 3′ | **R — Reaktivieren** | An KI-Erfahrung anknüpfen; Brücke: KI baut Websites | Plenum, Handzeichen | Beamer | 1 |
-| 5′ | **I — Informieren** | Was ist AI Studio; „guter Auftrag = gutes Ergebnis"; kurze Demo | Input + Demo | Beamer, Baukasten | 1 |
-| 8′ | **V — Verarbeiten** | Eigenen Prompt bauen; 1–2 zeigen live | Einzel-/Partnerarbeit | Geräte, WLAN, Handout | 2, 3 |
+| 5′ | **I — Informieren** | Was ist AI Studio; „guter Auftrag = gutes Ergebnis"; Demo mit **vorab generiertem** Beispiel | Input + Demo | Beamer, Baukasten | 1 |
+| 8′ | **V — Verarbeiten** | Eigenen Prompt bauen und Generierung **starten** (läuft weiter — nicht abwarten); 1–2 zeigen Prompt/Start | Einzel-/Partnerarbeit | Geräte, WLAN, Handout | 2, 3 |
 | 4′ | **A — Auswerten** | 3 Schritte + Einsatz nennen; Fragen; Abschluss | Murmelrunde, Plenum | Folie | 1–3 |
 
 **Gesamt 23′** — Schwerpunkt Verarbeiten. Reserve über Phase V steuerbar (s. Plan B).
+
+> **Zur Generierungsdauer:** Die Website-Generierung dauert mehrere Minuten (im Test ~8 Min., auch mit Pro-Konto). Darum im Unterricht nur *starten*, **nicht** auf das fertige Ergebnis warten — zum Zeigen ein vorab generiertes Beispiel nutzen. Fertige Websites der Teilnehmenden werden nach der Lektion (z. B. im Gruppenchat) geteilt.
 
 ---
 
@@ -47,6 +49,7 @@ Beobachtbar formuliert. Die Teilnehmenden können …
 - **Prompt-Baukasten** (`index.html`) auf GitHub Pages: **criseone.github.io/meine-website-ai-studio** — Browser, keine Installation, Eingaben bleiben lokal.
 - **QR-Code / Kurzlink** auf Folie und Handout.
 - **Beamer**, Laptop mit Internet, Google-Konto in AI Studio (Build-Modus offen).
+- **1–2 vorab generierte Beispiele** (Screenshots/Recording) — die Generierung dauert mehrere Minuten.
 - **Handout** (1 Seite) mit den 3 Schritten → `handout.md`.
 
 ---
@@ -55,9 +58,10 @@ Beobachtbar formuliert. Die Teilnehmenden können …
 
 | Risiko | Plan B |
 |---|---|
-| Kein/langsames WLAN | Screenshots einer fertigen Website bereithalten |
+| Generierung dauert mehrere Minuten (auch mit Pro) | Nicht live abwarten: vorab generiertes Beispiel zeigen; TN starten nur, Ergebnis kommt später |
+| Kein/langsames WLAN | Screenshots/Recording einer fertigen Website bereithalten |
 | Kein Google-Konto bei TN | Erzeugung nur durch Kursleitung; TN bauen nur den Prompt (LZ 2 bleibt) |
-| Zeit knapp | Nur eine Live-Erzeugung statt zwei |
+| Zeit knapp | Nur Prompt bauen und starten; Ergebnis später ansehen |
 | Unpassendes Ergebnis | Als Lernchance: gemeinsam nachbessern (zeigt das Prinzip) |
 
 ---

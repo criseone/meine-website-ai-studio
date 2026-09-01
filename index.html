@@ -58,6 +58,10 @@
     text-decoration:underline; text-underline-offset:3px; text-decoration-color:var(--line)}
   .link:hover{color:var(--ink)}
 
+  .toggle-wrap{margin:0 0 26px; padding:0 0 22px; border-bottom:1px solid var(--line)}
+  .toggle{display:inline-flex; align-items:center; gap:10px; cursor:pointer; user-select:none; font-weight:600; font-size:14.5px}
+  .toggle input{width:17px; height:17px; accent-color:var(--ink); cursor:pointer; margin:0}
+  .toggle-hint{margin:8px 0 0; font-size:12.5px; color:var(--muted); max-width:52ch}
   .out{position:sticky; top:32px}
   .promptbox{white-space:pre-wrap; word-break:break-word; background:var(--ink); color:#e7e7ea;
     border-radius:var(--r); padding:20px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
@@ -107,6 +111,11 @@
 
     <section>
       <p class="sec">Deine Angaben</p>
+
+      <div class="toggle-wrap">
+        <label class="toggle"><input type="checkbox" id="simple"><span>Einfach &amp; schnell halten</span></label>
+        <p class="toggle-hint">Erzeugt einen schlankeren Auftrag (eine Seite, keine aufwendigen Extras) — ideal für einen schnellen ersten Versuch im Unterricht.</p>
+      </div>
 
       <div class="field">
         <label class="lbl" for="art">Was möchtest du bauen?</label>
@@ -230,7 +239,7 @@
           <li>Mit Google-Konto anmelden.</li>
           <li>Im Bereich <b>Build</b> ins Eingabefeld klicken.</li>
           <li>Prompt einfügen und abschicken.</li>
-          <li>Rechts erscheint dein Ergebnis. Änderungen als nächste Nachricht.</li>
+          <li>Nach ein paar Minuten erscheint dein Ergebnis. Änderungen als nächste Nachricht.</li>
         </ol>
       </div>
 
@@ -258,6 +267,7 @@
     const v = id => $("#"+id).value.trim();
     const art=v("art"),titel=v("titel"),zweck=v("zweck"),ziel=v("ziel"),farbe=v("farbe"),sprache=v("sprache"),extra=v("extra");
     const inhalte=checked("inhalte"), stil=checked("stil"), funktionen=checked("funktionen");
+    const simple=$("#simple").checked;
     if(!art && !titel && !zweck && !ziel && !inhalte.length && !stil.length) return PLACEHOLDER;
 
     const APP=["Quiz oder Test","Rechner (z. B. Preis oder Trinkgeld)","To-do- / Checklisten-App","Kleines Spiel","Anderes Mini-Tool"];
@@ -275,6 +285,7 @@
     if(stil.length||farbe) p+="\n";
     if(funktionen.length){ p+="**Funktionen:**\n"; funktionen.forEach(f=>p+="- "+f+"\n"); p+="\n"; }
     if(extra)   p+="**Weitere Wünsche:**\n"+extra+"\n\n";
+    if(simple)  p+="**Einfach & schnell:** Als eine einzige Seite mit klaren Abschnitten umsetzen. Keine aufwendigen Extras, leichtgewichtig und schnell.\n\n";
     p+="**Wichtig:**\n- Auf Handy und Computer gut aussehen.\n- Passende Beispieltexte und Bilder verwenden.\n- Bedienung einfach und übersichtlich halten.";
     return p.trim();
   }
@@ -285,7 +296,7 @@
     save();
   }
   function save(){ try{
-    const d={f:{},g:{}};
+    const d={f:{},g:{},s:$("#simple").checked};
     ids.forEach(id=>d.f[id]=$("#"+id).value);
     groups.forEach(g=>d.g[g]=checked(g));
     localStorage.setItem(STORE,JSON.stringify(d));
@@ -296,6 +307,7 @@
     ids.forEach(id=>{ if(d.f&&d.f[id]!=null)$("#"+id).value=d.f[id]; });
     groups.forEach(g=>{ const vals=(d.g&&d.g[g])||[];
       document.querySelectorAll("#"+g+" input").forEach(i=>i.checked=vals.includes(i.value)); });
+    $("#simple").checked=!!d.s;
   }catch(e){} }
   function toast(m){ const t=$("#toast"); t.textContent=m; t.classList.add("show");
     clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("show"),1500); }
@@ -330,12 +342,13 @@
     if(!confirm("Alle Eingaben löschen?")) return;
     ids.forEach(id=>{ const el=$("#"+id); el.value = id==="sprache" ? "Deutsch" : ""; });
     document.querySelectorAll(".chips input").forEach(i=>i.checked=false);
+    $("#simple").checked=false;
     try{ localStorage.removeItem(STORE); }catch(e){}
     render(); toast("Zurückgesetzt");
   });
 
   document.addEventListener("input", e=>{ if(e.target.closest("section")) render(); });
-  document.addEventListener("change", e=>{ if(e.target.closest(".chips")||e.target.tagName==="SELECT") render(); });
+  document.addEventListener("change", e=>{ if(e.target.closest("section")) render(); });
 
   load(); render();
 })();
