@@ -9,7 +9,7 @@ Kein Programmieren nötig — du beschreibst, was du willst (eine Website oder e
 **1 · Auftrag bauen**
 Baukasten öffnen (QR scannen), Felder ausfüllen — der Prompt entsteht automatisch.
 
-**criseone.github.io/meine-website-ai-studio**
+**tinyurl.com/website-baukasten**
 
 ![QR-Code zum Baukasten](../qr.png)
 
