@@ -58,13 +58,6 @@
     text-decoration:underline; text-underline-offset:3px; text-decoration-color:var(--line)}
   .link:hover{color:var(--ink)}
 
-  .toggle-wrap{margin:0 0 26px; padding:0 0 22px; border-bottom:1px solid var(--line)}
-  .toggle{display:inline-flex; align-items:center; gap:10px; cursor:pointer; user-select:none; font-weight:600; font-size:14.5px}
-  .toggle input{width:17px; height:17px; accent-color:var(--ink); cursor:pointer; margin:0}
-  .toggle-hint{margin:8px 0 0; font-size:12.5px; color:var(--muted); max-width:52ch}
-  .field.locked{opacity:.4}
-  .field.locked .chips{pointer-events:none}
-  .field.locked #funk-opt{color:var(--ink)}
   .out{position:sticky; top:32px}
   .promptbox{white-space:pre-wrap; word-break:break-word; background:var(--ink); color:#e7e7ea;
     border-radius:var(--r); padding:20px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
@@ -114,11 +107,6 @@
 
     <section>
       <p class="sec">Deine Angaben</p>
-
-      <div class="toggle-wrap">
-        <label class="toggle"><input type="checkbox" id="simple"><span>Einfach &amp; schnell halten</span></label>
-        <p class="toggle-hint">Macht die Website bewusst einfach — ideal für einen schnellen ersten Versuch.</p>
-      </div>
 
       <div class="field">
         <label class="lbl" for="art">Was möchtest du bauen?</label>
@@ -204,8 +192,8 @@
         </div>
       </div>
 
-      <div class="field" id="field-funktionen">
-        <label class="lbl">Funktionen <span class="opt" id="funk-opt">optional</span></label>
+      <div class="field">
+        <label class="lbl">Funktionen <span class="opt">optional</span></label>
         <div class="chips" id="funktionen">
           <label class="chip"><input type="checkbox" value="ein Kontaktformular"><span>Kontaktformular</span></label>
           <label class="chip"><input type="checkbox" value="eine Karte mit dem Standort"><span>Standort-Karte</span></label>
@@ -270,7 +258,6 @@
     const v = id => $("#"+id).value.trim();
     const art=v("art"),titel=v("titel"),zweck=v("zweck"),ziel=v("ziel"),farbe=v("farbe"),sprache=v("sprache"),extra=v("extra");
     const inhalte=checked("inhalte"), stil=checked("stil"), funktionen=checked("funktionen");
-    const simple=$("#simple").checked;
     if(!art && !titel && !zweck && !ziel && !inhalte.length && !stil.length) return PLACEHOLDER;
 
     const APP=["Quiz oder Test","Rechner (z. B. Preis oder Trinkgeld)","To-do- / Checklisten-App","Kleines Spiel","Anderes Mini-Tool"];
@@ -288,34 +275,17 @@
     if(stil.length||farbe) p+="\n";
     if(funktionen.length){ p+="**Funktionen:**\n"; funktionen.forEach(f=>p+="- "+f+"\n"); p+="\n"; }
     if(extra)   p+="**Weitere Wünsche:**\n"+extra+"\n\n";
-    if(simple){
-      p+="**Einfach & schnell halten (Priorität, damit die Website schnell fertig ist):**\n";
-      p+="- Als **eine einzige HTML-Datei** (index.html), **ohne Backend** und **ohne npm-/Build-Schritt**.\n";
-      p+="- **Kein schweres JS-Framework mit Build** (kein React/Vue).\n";
-      p+="- **Keine KI-generierten Bilder** — stattdessen einfache Platzhalter, CSS-Flächen, Farben oder Emojis.\n";
-      p+="- Für ein **sauberes, fehlerfreies und responsives Layout Tailwind CSS über das Play-CDN** einbinden (ein einziges Script-Tag, kein Build-Schritt).\n";
-      p+="- Tailwind-Utility-Klassen für klare Abstände, Flexbox/Grid und Responsivität nutzen. Alles auf einer Seite.\n\n";
-      p+="**Wichtig:**\n- Auf Handy und Computer gut aussehen.\n- Klare, einfache Beispieltexte; für Bilder nur Platzhalter.\n- Bedienung einfach und übersichtlich halten.";
-    } else {
-      p+="**Wichtig:**\n- Auf Handy und Computer gut aussehen.\n- Passende Beispieltexte und Bilder verwenden.\n- Bedienung einfach und übersichtlich halten.";
-    }
+    p+="**Wichtig:**\n- Auf Handy und Computer gut aussehen.\n- Passende Beispieltexte und Bilder verwenden.\n- Bedienung einfach und übersichtlich halten.";
     return p.trim();
   }
 
-  function applySimpleMode(){
-    const on=$("#simple").checked;
-    const field=$("#field-funktionen"); if(field) field.classList.toggle("locked", on);
-    const opt=$("#funk-opt"); if(opt) opt.textContent = on ? "· in einfacher Variante deaktiviert" : "optional";
-    document.querySelectorAll("#funktionen input").forEach(i=>{ i.disabled=on; if(on) i.checked=false; });
-  }
   function render(){
-    applySimpleMode();
     const t=buildPrompt(), box=$("#prompt");
     box.textContent=t; box.classList.toggle("empty", t===PLACEHOLDER);
     save();
   }
   function save(){ try{
-    const d={f:{},g:{},s:$("#simple").checked};
+    const d={f:{},g:{}};
     ids.forEach(id=>d.f[id]=$("#"+id).value);
     groups.forEach(g=>d.g[g]=checked(g));
     localStorage.setItem(STORE,JSON.stringify(d));
@@ -326,7 +296,6 @@
     ids.forEach(id=>{ if(d.f&&d.f[id]!=null)$("#"+id).value=d.f[id]; });
     groups.forEach(g=>{ const vals=(d.g&&d.g[g])||[];
       document.querySelectorAll("#"+g+" input").forEach(i=>i.checked=vals.includes(i.value)); });
-    $("#simple").checked=!!d.s;
   }catch(e){} }
   function toast(m){ const t=$("#toast"); t.textContent=m; t.classList.add("show");
     clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("show"),1500); }
@@ -361,7 +330,6 @@
     if(!confirm("Alle Eingaben löschen?")) return;
     ids.forEach(id=>{ const el=$("#"+id); el.value = id==="sprache" ? "Deutsch" : ""; });
     document.querySelectorAll(".chips input").forEach(i=>i.checked=false);
-    $("#simple").checked=false;
     try{ localStorage.removeItem(STORE); }catch(e){}
     render(); toast("Zurückgesetzt");
   });

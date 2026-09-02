@@ -17,7 +17,7 @@ Baukasten öffnen (QR scannen), Felder ausfüllen — der Prompt entsteht automa
 Auf „Prompt kopieren" klicken.
 
 **3 · In AI Studio einfügen**
-Auf „Google AI Studio ↗" klicken, mit Google-Konto anmelden, im Bereich **Build** einfügen und abschicken. Die Website entsteht in **ein paar Minuten** — es läuft im Hintergrund, du musst nicht daneben warten.
+Auf „Google AI Studio ↗" klicken, mit Google-Konto anmelden, im Bereich **Build** einfügen und abschicken. Die Website entsteht in **ein paar Minuten** — es läuft im Hintergrund, du musst nicht daneben warten. Teile deinen Link nachher im **Gruppenchat**.
 
 ---
 
